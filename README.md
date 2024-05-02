@@ -1,8 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js TypeScript Starter Kit with Blockchain Integration
 
-## Getting Started
+This starter kit is designed to provide a comprehensive template for building frontends for your dApps using Next.js, TypeScript, Shadcn, and Tailwind CSS. It includes setup for WAGMI React hooks and Viem for seamless onchain transactions. 
 
-First, run the development server:
+By default, this template connects to the Morph Sepolia testnet.
+
+## Initial Setup
+
+### Environment Configuration
+
+Before you start, you need to set up your environment variables. Create a `.env.local` file in the root directory and add the following entry:
+
+```plaintext
+NEXT_PUBLIC_PROJECT_ID=<your_walletconnect_project_id>
+```
+
+You can obtain a `NEXT_PUBLIC_PROJECT_ID` by registering your project at [WalletConnect Cloud](https://cloud.walletconnect.com/).
+
+### Install Dependencies 
+
+```bash
+npm install
+# or
+yarn 
+# or
+pnpm install
+# or
+bun install
+```
+
+### Running the Development Server
+
+To run the development server, execute one of the following commands in your terminal:
 
 ```bash
 npm run dev
@@ -14,23 +42,21 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) to see your application in action. Begin by editing `app/page.tsx` to make changes and see them reflected in real time.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **TypeScript**: Utilize the strong typing of TypeScript to write more robust and error-free code.
+- **Tailwind CSS**: Style your application efficiently using utility-first CSS.
+- **WAGMI Hooks**: Manage blockchain wallet and network interactions with ease.
+- **Viem**: Handle on-chain interactions directly within your frontend application.
+- **Morph Sepolia Testnet**: Connect to the Morph testnet to develop and test your dApps without risking real assets.
 
-## Learn More
+## Learning Resources
 
-To learn more about Next.js, take a look at the following resources:
+- **Morph L2**: Learn more about Morph and its capabilities by visiting [Morph Layer 2 Official Site](https://www.morphl2.io/).
+- **Morph Documentation**: For detailed information on how Morph works and how to integrate it into your applications, check out the [Morph Docs](https://docs.morphl2.io/docs/how-morph-works/intro/).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Deploy your application with ease using platforms like Vercel, which provide out-of-the-box support for Next.js applications. Refer to platform-specific guides for details on deploying Next.js applications.
