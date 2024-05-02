@@ -61,4 +61,4 @@ Visit [http://localhost:3000](http://localhost:3000) to see your application in 
 
 ## 🚀 Deployment
 
-Deploy your application with ease using platforms like Vercel, which provide out-of-the-box support for Next.js applications. Refer to platform-specific guides for details on deploying Next.js applications.
+Deploy your application with ease using platforms like [Vercel](https://vercel.com/), which provides out-of-the-box support for Next.js applications, or [Juno](https://juno.build), which gives you full control over your dApp by enabling its deployment on Web3. Refer to platform-specific guides for details on deploying Next.js applications.
