@@ -28,6 +28,11 @@ export default function Home() {
   });
 
   useEffect(() => {
+    if (isConfirming) {
+      toast.loading("Transaction Pending");
+    }
+    toast.dismiss();
+
     if (isConfirmed) {
       toast.success("Transaction Successful", {
         action: {
@@ -41,7 +46,7 @@ export default function Home() {
     if (error) {
       toast.error("Transaction Failed");
     }
-  }, [isConfirmed, error, hash]);
+  }, [isConfirming, isConfirmed, error, hash]);
 
   return (
     <main>
