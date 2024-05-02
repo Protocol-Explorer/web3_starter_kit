@@ -64,7 +64,7 @@ export default function Home() {
             <Button
               onClick={() =>
                 sendTransaction({
-                  to: "0xd5Ba400e732b3d769aA75fc67649Ef4849774bb1",
+                  to: "0x1a343eFB966E63bfA25A2b368455448f02466Ffc",
                   value: parseEther("0.1"),
                 })
               }
