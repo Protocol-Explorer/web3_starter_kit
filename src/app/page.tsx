@@ -1,22 +1,47 @@
 "use client";
-import Image from "next/image";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   useAccount,
   useSendTransaction,
   useSignMessage,
+  useWaitForTransactionReceipt,
 } from "wagmi";
 import { parseEther } from "viem";
+import { toast } from "sonner";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 
 export default function Home() {
   const { isConnected } = useAccount();
   const { signMessage } = useSignMessage();
-  const { sendTransaction } = useSendTransaction();
+  const { sendTransaction, data: hash } = useSendTransaction();
   const { open } = useWeb3Modal();
   const handleConnect = () => {
     open();
   };
+  const {
+    isLoading: isConfirming,
+    error,
+    isSuccess: isConfirmed,
+  } = useWaitForTransactionReceipt({
+    hash,
+  });
+
+  useEffect(() => {
+    if (isConfirmed) {
+      toast.success("Transaction Successful", {
+        action: {
+          label: "View on Etherscan",
+          onClick: () => {
+            window.open(`https://explorer-testnet.morphl2.io/tx/${hash}`);
+          },
+        },
+      });
+    }
+    if (error) {
+      toast.error("Transaction Failed");
+    }
+  }, [isConfirmed, error, hash]);
 
   return (
     <main>
@@ -39,10 +64,11 @@ export default function Home() {
             <Button
               onClick={() =>
                 sendTransaction({
-                  to: "0x1a343eFB966E63bfA25A2b368455448f02466Ffc",
+                  to: "0xd5Ba400e732b3d769aA75fc67649Ef4849774bb1",
                   value: parseEther("0.1"),
                 })
               }
+              disabled={isConfirming}
               variant={"secondary"}
             >
               Tip .1 Eth
