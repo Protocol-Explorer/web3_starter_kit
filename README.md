@@ -1,10 +1,12 @@
 # Next.js TypeScript Starter Kit onchain
 
+![A screenshot of the starter kit](./screenshot.png)
+
 This starter kit is designed to provide a comprehensive template for building frontends for your dApps using Next.js, TypeScript, Shadcn, and Tailwind CSS. It includes setup for WAGMI React hooks and Viem for seamless onchain transactions. 
 
 By default, this template connects to the Morph Sepolia testnet.
 
-## Initial Setup
+## 🧑‍🚀 Initial Setup
 
 ### Environment Configuration
 
@@ -44,7 +46,7 @@ bun dev
 
 Visit [http://localhost:3000](http://localhost:3000) to see your application in action. Begin by editing `app/page.tsx` to make changes and see them reflected in real time.
 
-## Features
+## 🧞 Features
 
 - **TypeScript**: Utilize the strong typing of TypeScript to write more robust and error-free code.
 - **Tailwind CSS**: Style your application efficiently using utility-first CSS.
@@ -52,11 +54,11 @@ Visit [http://localhost:3000](http://localhost:3000) to see your application in 
 - **Viem**: Handle on-chain interactions directly within your frontend application.
 - **Morph Sepolia Testnet**: Connect to the Morph testnet to develop and test your dApps.
 
-## Learning Resources
+## ✨ Learning Resources
 
 - **Morph L2**: Learn more about Morph and its capabilities by visiting [Morph Layer 2 Official Site](https://www.morphl2.io/).
 - **Morph Documentation**: For detailed information on how Morph works and how to integrate it into your applications, check out the [Morph Docs](https://docs.morphl2.io/docs/how-morph-works/intro/).
 
-## Deployment
+## 🚀 Deployment
 
 Deploy your application with ease using platforms like Vercel, which provide out-of-the-box support for Next.js applications. Refer to platform-specific guides for details on deploying Next.js applications.
