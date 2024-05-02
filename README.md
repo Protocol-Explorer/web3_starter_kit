@@ -1,4 +1,4 @@
-# Next.js TypeScript Starter Kit with Blockchain Integration
+# Next.js TypeScript Starter Kit onchain
 
 This starter kit is designed to provide a comprehensive template for building frontends for your dApps using Next.js, TypeScript, Shadcn, and Tailwind CSS. It includes setup for WAGMI React hooks and Viem for seamless onchain transactions. 
 
@@ -50,7 +50,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see your application in 
 - **Tailwind CSS**: Style your application efficiently using utility-first CSS.
 - **WAGMI Hooks**: Manage blockchain wallet and network interactions with ease.
 - **Viem**: Handle on-chain interactions directly within your frontend application.
-- **Morph Sepolia Testnet**: Connect to the Morph testnet to develop and test your dApps without risking real assets.
+- **Morph Sepolia Testnet**: Connect to the Morph testnet to develop and test your dApps.
 
 ## Learning Resources
 
