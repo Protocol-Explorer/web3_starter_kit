@@ -1,4 +1,3 @@
-
 import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -6,6 +5,7 @@ import { headers } from "next/headers";
 
 import { cn } from "@/lib/utils";
 import Nav from "@/components/Nav";
+import { Toaster } from "@/components/ui/sonner";
 
 import { cookieToInitialState } from "wagmi";
 
@@ -52,6 +52,7 @@ export default function RootLayout({
             </Web3ModalProvider>
           </ThemeProvider>
         </div>
+        <Toaster richColors />
       </body>
     </html>
   );
