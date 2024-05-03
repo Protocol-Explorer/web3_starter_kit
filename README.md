@@ -10,13 +10,13 @@ By default, this template connects to the Morph Sepolia testnet.
 
 ### Environment Configuration
 
-Before you start, you need to set up your environment variables. Create a `.env.local` file in the root directory and add the following entry:
+Before you start, you need to set up your environment variables. Create a `.env.local` file in the root directory by running:
 
-```plaintext
-NEXT_PUBLIC_PROJECT_ID=<your_walletconnect_project_id>
+```bash
+cp .env.example .env.local
 ```
 
-You can obtain a `NEXT_PUBLIC_PROJECT_ID` by registering your project at [WalletConnect Cloud](https://cloud.walletconnect.com/).
+In the file, update the `NEXT_PUBLIC_PROJECT_ID` variable with your WalletConnect project ID. You can obtain one by registering your project at [WalletConnect Cloud](https://cloud.walletconnect.com/).
 
 ### Install Dependencies 
 
