@@ -6,7 +6,7 @@ import { morphSepolia } from "viem/chains";
 
 // Get projectId at https://cloud.walletconnect.com
 export const projectId =
-  process.env.NEXT_PUBLIC_PROJECT_ID || "d7d3e7d3b57f91f53b714a8b73b02ccc";
+  process.env.NEXT_PUBLIC_PROJECT_ID;
 
 if (!projectId) throw new Error("Project ID is not defined");
 
