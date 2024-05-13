@@ -13,7 +13,7 @@ const InputComponent: React.FC<InputComponentProps> = ({
   }) => (
     <div className="flex bg-[#2b3655] rounded-2xl items-left flex-col flex-grow pt-6 mb-4">
       <div className="mb-6">
-      <h1 className="mb-2 ml-3">{type === 'pay' ? 'You pay' : 'You receive'}</h1>
+      <h1 className="mb-2 ml-3 text-white">{type === 'pay' ? 'You pay' : 'You receive'}</h1>
         <input
           type="text"
           value={value}

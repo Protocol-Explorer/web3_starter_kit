@@ -1,147 +1,86 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   useAccount,
   useSendTransaction,
   useSignMessage,
   useWaitForTransactionReceipt,
-  useReadContract,
-  useWriteContract,
 } from "wagmi";
 import { parseEther } from "viem";
 import { toast } from "sonner";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
-import MUSD_CONTRACT from "../contracts/mUSD.json";
-import { Card, Tab, TabGroup, TabList, TabPanels } from "@tremor/react";
-import { UserGroupIcon, UserIcon } from "@heroicons/react/24/outline";
-import InputComponent from "@/components/InputWidget";
 
 export default function Home() {
   const { isConnected } = useAccount();
-  const { address } = useAccount();
+  const { signMessage } = useSignMessage();
+  const { sendTransaction, data: hash } = useSendTransaction();
   const { open } = useWeb3Modal();
-  const [vUSD, setVUSD] = useState<number>(0);
-  const [other, setOther] = useState<number>(0);
-
   const handleConnect = () => {
     open();
   };
-  // const {
-  //   isLoading: isConfirming,
-  //   error,
-  //   isSuccess: isConfirmed,
-  // } = useWaitForTransactionReceipt({
-  //   hash,
-  // });
-
-  // useEffect(() => {
-  //   if (isConfirming) {
-  //     toast.loading("Transaction Pending");
-  //   }
-  //   toast.dismiss();
-
-  //   if (isConfirmed) {
-  //     toast.success("Transaction Successful", {
-  //       action: {
-  //         label: "View on Etherscan",
-  //         onClick: () => {},
-  //       },
-  //     });
-  //   }
-  //   if (error) {
-  //     toast.error("Transaction Failed");
-  //   }
-  // }, [isConfirming, isConfirmed, error]);
-
-  const { data: name } = useReadContract({
-    address: "0xbCCc252A134cEf81be20DF52F27D9029507F3605",
-    abi: MUSD_CONTRACT,
-    functionName: "name",
+  const {
+    isLoading: isConfirming,
+    error,
+    isSuccess: isConfirmed,
+  } = useWaitForTransactionReceipt({
+    hash,
   });
-  const { writeContract } = useWriteContract();
+
+  useEffect(() => {
+    if (isConfirming) {
+      toast.loading("Transaction Pending");
+    }
+    toast.dismiss();
+
+    if (isConfirmed) {
+      toast.success("Transaction Successful", {
+        action: {
+          label: "View on Etherscan",
+          onClick: () => {
+            window.open(`https://explorer-testnet.morphl2.io/tx/${hash}`);
+          },
+        },
+      });
+    }
+    if (error) {
+      toast.error("Transaction Failed");
+    }
+  }, [isConfirming, isConfirmed, error, hash]);
 
   return (
     <main>
       <section className="py-12 flex flex-col items-center text-center gap-8">
         <h1 className="text-4xl font-bold">Web3 Starter Kit</h1>
+        <p className="text-2xl text-muted-foreground">
+          Build your dapp frontends with the latest tools.
+        </p>
       </section>
-
-      <Card className="max-w-md mx-auto rounded-3xl lg:mt-0 mt-14 bg-background ">
-        <TabGroup>
-          <TabList className="my-2">
-            <Tab
-              className="px-4 rounded-2xl hover:bg-secondary"
-              icon={UserGroupIcon}
+      <div className="flex gap-6 items-center justify-center">
+        {!isConnected ? (
+          <Button onClick={handleConnect}>Connect Wallet</Button>
+        ) : (
+          <>
+            <Button onClick={handleConnect}>Info</Button>
+            <Button onClick={() => signMessage({ message: "gm" })}>
+              {" "}
+              Say GM{" "}
+            </Button>
+            <Button
+              onClick={() =>
+                sendTransaction({
+                  to: "0x1a343eFB966E63bfA25A2b368455448f02466Ffc",
+                  value: parseEther("0.1"),
+                })
+              }
+              disabled={isConfirming}
+              variant={"secondary"}
             >
-              Swap
-            </Tab>
-            <Tab
-              className="px-4 rounded-2xl hover:bg-secondary"
-              icon={UserIcon}
-            >
-              Limit Order
-            </Tab>
-            <Tab
-              className="px-4 rounded-2xl hover:bg-secondary"
-              icon={UserIcon}
-            >
-              Pool
-            </Tab>
-          </TabList>
-        </TabGroup>
-        <InputComponent
-          type="pay"
-          label="vUSDC"
-          value={vUSD}
-          setValue={setVUSD}
-        />
-        <div className="flex justify-center mb-2">
-          <button className="btn btn-accent hover:bg-secondary p-2 rounded-xl">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
-              />
-            </svg>
-          </button>
-        </div>
-        <InputComponent
-          type="receive"
-          label="other"
-          value={other}
-          setValue={setOther}
-        />
-        <div className="flex justify-center">
-          {!isConnected ? (
-            <Button onClick={handleConnect}>Connect Wallet</Button>
-          ) : (
-            <>
-              {/* <Button
-                onClick={() =>
-                  sendTransaction({
-                    to: "0x1a343eFB966E63bfA25A2b368455448f02466Ffc",
-                    value: parseEther("0.1"),
-                  })
-                }
-                disabled={isConfirming}
-                variant={"secondary"}
-              >
-                Swap
-              </Button> */}
-              <Button className="rounded-2xl px-6">Swap</Button>
-            </>
-          )}
-        </div>
-      </Card>
+              Tip .1 Eth
+            </Button>
+          </>
+        )}
+      </div>
     </main>
   );
 }
