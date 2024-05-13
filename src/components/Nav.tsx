@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image"
 import { ModeToggle } from "./Modetoggle"
+import Link from "next/link"
 
 
 export default function Nav() {
@@ -25,6 +26,11 @@ export default function Nav() {
             />
           </a>
           </li>
+          <Link className="p-2 px-6 rounded-2xl hover:bg-secondary" href="claim">Claim</Link>
+          <Link className="p-2 px-6 rounded-2xl hover:bg-secondary" href="virtualizer">Virtualizer</Link>
+          <Link className="p-2 px-6 rounded-2xl hover:bg-secondary" href="varq">VARQ</Link>
+          <Link className="p-2 px-6 rounded-2xl hover:bg-secondary" href="amm">AMM</Link>
+          <Link className="p-2 px-6 rounded-2xl hover:bg-secondary" href="vex">VEX</Link>
           <li><ModeToggle /></li>
         </ul>
       </nav>

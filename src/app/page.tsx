@@ -67,11 +67,27 @@ export default function Home() {
         <h1 className="text-4xl font-bold">Web3 Starter Kit</h1>
       </section>
 
-      <Card className="max-w-md mx-auto rounded-3xl lg:mt-0 mt-14 bg-secondary ">
+      <Card className="max-w-md mx-auto rounded-3xl lg:mt-0 mt-14 bg-background ">
         <TabGroup>
           <TabList className="my-2">
-            <Tab icon={UserGroupIcon}>Swap</Tab>
-            <Tab icon={UserIcon}>Limit Order</Tab>
+            <Tab
+              className="px-4 rounded-2xl hover:bg-secondary"
+              icon={UserGroupIcon}
+            >
+              Swap
+            </Tab>
+            <Tab
+              className="px-4 rounded-2xl hover:bg-secondary"
+              icon={UserIcon}
+            >
+              Limit Order
+            </Tab>
+            <Tab
+              className="px-4 rounded-2xl hover:bg-secondary"
+              icon={UserIcon}
+            >
+              Pool
+            </Tab>
           </TabList>
         </TabGroup>
         <InputComponent
@@ -81,7 +97,7 @@ export default function Home() {
           setValue={setVUSD}
         />
         <div className="flex justify-center mb-2">
-          <button className="btn btn-accent">
+          <button className="btn btn-accent hover:bg-secondary p-2 rounded-xl">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -121,7 +137,7 @@ export default function Home() {
               >
                 Swap
               </Button> */}
-              <Button>Swap</Button>
+              <Button className="rounded-2xl px-6">Swap</Button>
             </>
           )}
         </div>
