@@ -2,7 +2,7 @@ type CustomTabProps = {
   label: string;
   isActive: boolean;
   onClick: () => void;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
 };
 
 const CustomTab: React.FC<CustomTabProps> = ({
@@ -13,7 +13,7 @@ const CustomTab: React.FC<CustomTabProps> = ({
 }) => {
   // Constructing class string conditionally
   const baseClasses =
-    "py-1.5 px-3 text-2xl rounded-full grid grid-flow-col mr-2";
+    "p-2 px-4 text-2xl rounded-2xl grid grid-flow-col mr-2 border border-grey-300";
   const activeClasses = isActive
     ? "bg-secondary shadow-md"
     : "hover:bg-secondary hover:shadow-md";
@@ -25,3 +25,6 @@ const CustomTab: React.FC<CustomTabProps> = ({
     </button>
   );
 };
+
+// Default export
+export default CustomTab;
