@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -80,6 +81,11 @@ export default function Home() {
             </Button>
           </>
         )}
+      </div>
+      <div className="flex mt-10 items-center justify-center">
+        <Link href="/counter">
+          <Button className="w-60">Counter</Button>
+        </Link>
       </div>
     </main>
   );
