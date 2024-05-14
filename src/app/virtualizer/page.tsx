@@ -39,13 +39,15 @@ export default function Virtualizer() {
           )}
         </div>
       </Card>
-        <div className="p-2">
-          <div>
-            <h1 className="mt-4">Balance:</h1>
-            <h1>mUSDC: 1000</h1>
-            <h1>vUSD: 1000</h1>
-          </div>
+      <div className="p-2 flex flex-col w-full">
+        <div className="flex justify-center">
+          <h1 className="mt-4">Balance:</h1>
         </div>
+        <div className="flex flex-row justify-evenly">
+          <h1>mUSDC: 1000</h1>
+          <h1>vUSD: 1000</h1>
+        </div>
+      </div>
     </div>
   );
 }

@@ -17,8 +17,8 @@ export default function Nav() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/pex.png"
-              alt="PEX Logo"
+              src="/vifi-logo.PNG"
+              alt="VIFI Logo"
               className="dark:invert"
               width={100}
               height={24}
