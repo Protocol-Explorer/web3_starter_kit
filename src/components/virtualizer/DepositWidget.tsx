@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import InputComponent from "@/components/virtualizer/Input";
+import InputComponent from "./Input";
 
 export default function DepositWidget() {
   const [mUSDC, setmUSDC] = useState<number>(0);
