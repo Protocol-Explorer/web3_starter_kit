@@ -14,6 +14,7 @@ import { parseEther } from "viem";
 import { toast } from "sonner";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import MUSD_CONTRACT from "../../contracts/mUSD.json";
+import CLAIM_CONTRACT from "../../contracts/claim.json"
 import { Card, Tab, TabGroup, TabList, TabPanels } from "@tremor/react";
 import { UserGroupIcon, UserIcon } from "@heroicons/react/24/outline";
 import InputComponent from "@/components/InputWidget";
@@ -67,16 +68,12 @@ export default function Claim() {
                 <>
                   <Button
                     onClick={()=>writeContract({
-                      abi:MUSD_CONTRACT,
-                      address:"0xbCCc252A134cEf81be20DF52F27D9029507F3605",
-                      functionName:'approve',
-                      args:["0x38776466c8Fd3bA4f4bAc99403aDFA381C4e2e43",parseEther("10")]
+                      abi:CLAIM_CONTRACT,
+                      address:"0x3A23b1EdD60851aB69ab941B54528c385b0C1dFC",
+                      functionName:'claim',
                     })}
-                    className='rounded-2xl px-6"'
-                  >
-                    Approve
+                    className="rounded-2xl px-6 mt-12">Claim
                   </Button>
-                  <Button className="rounded-2xl px-6 mt-12">Claim</Button>
                 </>
               )}
             </div>
