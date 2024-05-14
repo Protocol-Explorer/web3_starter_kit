@@ -63,10 +63,6 @@ export default function AmmPage() {
 
   return (
     <main>
-      <section className="py-12 flex flex-col items-center text-center gap-8">
-        <h1 className="text-4xl font-bold">Web3 Starter Kit</h1>
-      </section>
-
       <Card className="max-w-md mx-auto rounded-3xl lg:mt-0 mt-14 bg-background">
         <TabGroup>
           <TabList className="my-2">
