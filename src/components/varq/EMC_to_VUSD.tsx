@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import InputComponent from "./Input";
 import Image from "next/image";
+import { Button } from "../ui/button";
+import { useAccount } from "wagmi";
 
 export default function EMC_to_VUSD() {
+  const address = useAccount();
+  const handleConnect = () => {
+    open();
+  };
   const [VUSD, setVUSD] = useState<number>(0);
   const [VTTD, setVTTD] = useState<number>(0);
   const [VRT, setVRT] = useState<number>(0);
@@ -37,6 +43,15 @@ export default function EMC_to_VUSD() {
           onValueChange={setVUSD}
           initialValue={VUSD}
         />
+      </div>
+      <div className="flex flex-col justify-center mx-2">
+        {!address ? (
+          <Button onClick={handleConnect}>Connect Wallet</Button>
+        ) : (
+          <>
+            <Button className="rounded-2xl px-6">Convert</Button>
+          </>
+        )}
       </div>
     </div>
   );
