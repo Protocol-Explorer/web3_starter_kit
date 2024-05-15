@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 interface InputComponentProps {
   label: string;
-  initialValue: number;  // Changed from `value` to `initialValue` to avoid prop conflicts
-  onValueChange?: (newValue: number) => void;  // Optional callback for external updates
+  initialValue: number;  
+  onValueChange?: (newValue: number) => void;  
   type: string;
 }
 
