@@ -13,7 +13,7 @@ const CustomTab: React.FC<CustomTabProps> = ({
 }) => {
   // Constructing class string conditionally
   const baseClasses =
-    "p-2 px-4 text-2xl rounded-2xl grid grid-flow-col mr-2 border border-grey-300";
+    "p-2 px-4 text-lg rounded-2xl grid grid-flow-col mr-2 border border-grey-300";
   const activeClasses = isActive
     ? "bg-secondary shadow-md"
     : "hover:bg-secondary hover:shadow-md";
