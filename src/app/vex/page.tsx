@@ -45,46 +45,76 @@ export default function Vex() {
       </section>
 
       <Card className="max-w-md mx-auto rounded-3xl lg:mt-0 mt-14 bg-background">
-        <InputComponent
-          type="pay"
-          label="vUSDC"
-          value={vUSD}
-          setValue={setVUSD}
-        />
+        
         {swap ? (
           <>
-            
+            <InputComponent
+              type="receive"
+              label="vTTD"
+              value={vTTD}
+              setValue={setVTTD}
+            />
+            <div className="flex justify-center mb-2" onClick={handleSwap}>
+              <button className="btn btn-accent hover:bg-secondary p-2 rounded-xl">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+                  />
+                </svg>
+             </button>
+            </div>
+            <InputComponent
+              type="pay"
+              label="vUSDC"
+              value={vUSD}
+              setValue={setVUSD}
+            />
           </>
         ):(
           <>
-          
+            <InputComponent
+              type="pay"
+              label="vUSDC"
+              value={vUSD}
+              setValue={setVUSD}
+            />
+            <div className="flex justify-center mb-2" onClick={handleSwap}>
+              <button className="btn btn-accent hover:bg-secondary p-2 rounded-xl">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+                  />
+                </svg>
+             </button>
+            </div>
+            <InputComponent
+              type="receive"
+              label="vTTD"
+              value={vTTD}
+              setValue={setVTTD}
+            />
           </>
 
         )}
-        <div className="flex justify-center mb-2">
-          <button className="btn btn-accent hover:bg-secondary p-2 rounded-xl">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
-              />
-            </svg>
-          </button>
-        </div>
-        <InputComponent
-          type="receive"
-          label="vTTD"
-          value={vTTD}
-          setValue={setVTTD}
-        />
+        
         <div className="flex justify-center">
           {!isConnected ? (
             <Button onClick={handleConnect}>Connect Wallet</Button>
