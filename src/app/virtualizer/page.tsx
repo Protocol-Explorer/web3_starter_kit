@@ -1,11 +1,12 @@
 "use client";
 import { Card } from "@tremor/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomTab from "@/components/CustomTab";
 import DepositWidget from "@/components/virtualizer/DepositWidget";
 import WithdrawWidget from "@/components/virtualizer/WithdrawWidget";
 import { useAccount, useReadContract } from "wagmi";
 import MUSD_CONTRACT from "../../contracts/mUSD.json"
+import VUSD_CONTRACT from "../../contracts/vtoken.json"
 import Modal from "@/components/virtualizer/Modal";
 
 
@@ -25,6 +26,21 @@ export default function Virtualizer() {
     functionName: "balanceOf",
     args: [user_address]
   })
+
+  const {data: vUSD_balance} = useReadContract({
+    abi: VUSD_CONTRACT,
+    address: "0x99C9AFc5F81984684bd015Ab2300fD7F316a92cF",
+    functionName: "balanceOf",
+    args: [user_address]
+  })
+
+  useEffect(() => {
+    // This will run when the 'value' changes
+  }, [balance, vUSD_balance]);
+
+  console.log("VUSD:", vUSD_balance)
+  const vUSD_string = String(vUSD_balance)
+  const formatVUSD_balance = vUSD_string?.slice(0, -18)
 
   const string_balance = balance?.toString()
   const formatBalance = string_balance?.slice(0, -18)
@@ -61,7 +77,7 @@ export default function Virtualizer() {
           </div>
           <div className="flex flex-row justify-evenly">
             <h1>mUSDC: {formatBalance}</h1>
-            <h1>vUSD: 1000</h1>
+            <h1>vUSD: {formatVUSD_balance}</h1>
           </div>
         </div>
       </Card>

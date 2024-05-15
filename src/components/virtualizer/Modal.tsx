@@ -15,8 +15,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   const { writeContractAsync, isSuccess, isError: error } = useWriteContract();
 
-  console.log("Idk", isSuccess)
-
   useEffect(() => {
     if (isSuccess === true) {
       onClose()
@@ -24,7 +22,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     if (error) {
       console.error("Transaction Failed");
     }
-  }, [isSuccess,  error,]);
+  }, [isSuccess,  error]);
 
   
 

@@ -5,10 +5,9 @@ import Modal from "./Modal";
 import DisabledInputComponent from "./DisabledInput";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import MUSD_CONTRACT from "../../contracts/mUSD.json";
+import VIRTUALISER_CONTRACT from "../../contracts/virtualizer.json"
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { parseEther } from "viem";
-import CLAIM_CONTRACT from "../../contracts/claim.json"
-
 
 export default function DepositWidget() {
   const { address } = useAccount();
@@ -30,15 +29,14 @@ export default function DepositWidget() {
   });
 
   const approve_str = approved?.toString();
-  const transfer_mUSDC = BigInt(parseEther(mUSDC.toString()));
+  const transfer_mUSDC = String(parseEther(mUSDC.toString()));
 
   const handleDeposit = () => {
     if (approve_str === "0") {
       openModal();
     } else {
-      
       writeContract({
-        abi: MUSD_CONTRACT,
+        abi: VIRTUALISER_CONTRACT,
         address: "0x0a90769a8B53515C5F671eD7379DF3Ed2bDE910e",
         functionName: "wrap",
         args: [transfer_mUSDC],
