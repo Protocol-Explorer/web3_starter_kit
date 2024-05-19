@@ -14,6 +14,8 @@ import Modal from "@/components/virtualizer/Modal";
 export default function Virtualizer() {
   const [activeTab, setActiveTab] = useState<string>("deposit");
   const user_address = useAccount().address;
+  const [mUSDCbalance, setmUSDC_Balance] = useState<string>("");
+  const [vUSDBalance, setVUSD_Balance] = useState<string>("");
   
 
   const handleTabChange = (tabName: string) => {
@@ -34,16 +36,24 @@ export default function Virtualizer() {
     args: [user_address]
   })
 
-  useEffect(() => {
-    // This will run when the 'value' changes
-  }, [balance, vUSD_balance]);
-
   console.log("VUSD:", vUSD_balance)
   const vUSD_string = String(vUSD_balance)
   const formatVUSD_balance = vUSD_string?.slice(0, -18)
 
   const string_balance = balance?.toString()
-  const formatBalance = string_balance?.slice(0, -18)
+  const formatMUSD_balance = string_balance?.slice(0, -18)
+
+  useEffect(() => {
+    if (formatMUSD_balance) {
+      setmUSDC_Balance((formatMUSD_balance));
+    }
+  }, [formatMUSD_balance]);
+
+  useEffect(() => {
+    if (formatVUSD_balance) {
+      setVUSD_Balance((formatVUSD_balance));
+    }
+  }, [formatVUSD_balance]);
   return (
     <div className="flex items-center flex-col flex-grow pt-6 lg:pt-12">
       <Card className="max-w-md mx-auto rounded-3xl lg:mt-0 mt-14 bg-background">
@@ -76,8 +86,8 @@ export default function Virtualizer() {
             <h1 className="mt-4 mb-2">Balance:</h1>
           </div>
           <div className="flex flex-row justify-evenly">
-            <h1>mUSDC: {formatBalance}</h1>
-            <h1>vUSD: {formatVUSD_balance}</h1>
+            <h1>mUSDC: {mUSDCbalance}</h1>
+            <h1>vUSD: {vUSDBalance}</h1>
           </div>
         </div>
       </Card>
