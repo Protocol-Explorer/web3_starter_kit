@@ -37,6 +37,14 @@ export default function AmmPage() {
   });
   const { writeContract } = useWriteContract();
 
+  useEffect(() => {
+    setvRT(parseFloat((vTTD * 0.67).toFixed(2)));
+  }, [vTTD]);
+
+  useEffect(() => {
+    setvTTD(parseFloat((vRT / 0.67).toFixed(2)));
+  }, [vRT]);
+
   return (
     <main>
       <Card className="max-w-md mx-auto rounded-3xl lg:mt-0 mt-14 bg-background">
@@ -113,11 +121,7 @@ export default function AmmPage() {
                 </svg>
               </button>
             </div>
-            <InputComponent
-              type="receive"
-              label="vTTD"
-              value={vTTD}
-              setValue={setvTTD}
+            <DisabledInputComponent type="receive" label="vTTD" initialValue={vTTD} currency="vTTD"
             />
           </>
         ) : (
@@ -146,7 +150,7 @@ export default function AmmPage() {
                 </svg>
               </button>
             </div>
-            <DisabledInputComponent type="receive" label="vRT" initialValue={vTTD*0.67} currency="vRT" />
+            <DisabledInputComponent type="receive" label="vRT" initialValue={vRT} currency="vRT" />
           </>
         )}
         <div className="flex justify-center">
