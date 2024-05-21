@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 interface InputComponentProps {
   label: string;
-  initialValue: number;  // Changed from `value` to `initialValue` to avoid prop conflicts
-  onValueChange?: (newValue: number) => void;  // Optional callback for external updates
+  initialValue: number;  
+  onValueChange?: (newValue: number) => void;  
 }
 
 const InputComponent: React.FC<InputComponentProps> = ({
@@ -11,19 +11,27 @@ const InputComponent: React.FC<InputComponentProps> = ({
   initialValue,
   onValueChange,
 }) => {
-  
-  const [value, setValue] = useState(() => {
-    const savedValue = localStorage.getItem(label);
-    return savedValue !== null ? parseFloat(savedValue) : initialValue;
-  });
+  const [value, setValue] = useState(initialValue);
+  const [isMounted, setIsMounted] = useState(false);
 
-  
   useEffect(() => {
-    localStorage.setItem(label, value.toString()); 
-    if (onValueChange) {
-      onValueChange(value);
+    if (typeof window !== 'undefined') {
+      const savedValue = localStorage.getItem(label);
+      if (savedValue !== null) {
+        setValue(parseFloat(savedValue));
+      }
     }
-  }, [value, label, onValueChange]);
+    setIsMounted(true);
+  }, [label]);
+
+  useEffect(() => {
+    if (isMounted) {
+      localStorage.setItem(label, value.toString());
+      if (onValueChange) {
+        onValueChange(value);
+      }
+    }
+  }, [value, label, onValueChange, isMounted]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(e.target.value);
