@@ -10,7 +10,6 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null;
   
 
   const { writeContractAsync, isSuccess, isError: error } = useWriteContract();
@@ -22,7 +21,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     if (error) {
       console.error("Transaction Failed");
     }
-  }, [isSuccess,  error]);
+  }, [isSuccess,  error, onClose]);
+
+  if (!isOpen) return null;
 
   
 
