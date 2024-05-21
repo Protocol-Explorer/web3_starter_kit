@@ -3,9 +3,6 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   useAccount,
-  useSendTransaction,
-  useSignMessage,
-  useWaitForTransactionReceipt,
   useReadContract,
   useWriteContract,
 } from "wagmi";
@@ -15,44 +12,23 @@ import { useWeb3Modal } from "@web3modal/wagmi/react";
 import MUSD_CONTRACT from "../../contracts/mUSD.json";
 import { Card, Tab, TabGroup, TabList, TabPanels } from "@tremor/react";
 import { UserGroupIcon, UserIcon } from "@heroicons/react/24/outline";
-import InputComponent from "@/components/InputWidget";
+import InputComponent from "@/components/amm/InputWidget";
+import DisabledInputComponent from "@/components/amm/DisabledInput";
 
 export default function AmmPage() {
   const { isConnected } = useAccount();
   const { address } = useAccount();
   const { open } = useWeb3Modal();
-  const [vUSD, setVUSD] = useState<number>(0);
-  const [other, setOther] = useState<number>(0);
+  const [vRT, setvRT] = useState<number>(0);
+  const [vTTD, setvTTD] = useState<number>(0);
+  const [Swap, setSwap] = useState<boolean>(false);
 
   const handleConnect = () => {
     open();
   };
-  // const {
-  //   isLoading: isConfirming,
-  //   error,
-  //   isSuccess: isConfirmed,
-  // } = useWaitForTransactionReceipt({
-  //   hash,
-  // });
-
-  // useEffect(() => {
-  //   if (isConfirming) {
-  //     toast.loading("Transaction Pending");
-  //   }
-  //   toast.dismiss();
-
-  //   if (isConfirmed) {
-  //     toast.success("Transaction Successful", {
-  //       action: {
-  //         label: "View on Etherscan",
-  //         onClick: () => {},
-  //       },
-  //     });
-  //   }
-  //   if (error) {
-  //     toast.error("Transaction Failed");
-  //   }
-  // }, [isConfirming, isConfirmed, error]);
+  const handleSwap = () => {
+    setSwap(!Swap);
+  };
 
   const { data: name } = useReadContract({
     address: "0xbCCc252A134cEf81be20DF52F27D9029507F3605",
@@ -86,12 +62,7 @@ export default function AmmPage() {
             </Tab>
           </TabList>
         </TabGroup>
-        <InputComponent
-          type="pay"
-          label="vUSDC"
-          value={vUSD}
-          setValue={setVUSD}
-        />
+        {/* <InputComponent type="pay" label="vRT" value={vRT} setValue={setvRT} />
         <div className="flex justify-center mb-2">
           <button className="btn btn-accent hover:bg-secondary p-2 rounded-xl">
             <svg
@@ -112,29 +83,77 @@ export default function AmmPage() {
         </div>
         <InputComponent
           type="receive"
-          label="other"
-          value={other}
-          setValue={setOther}
-        />
+          label="vTTD"
+          value={vTTD}
+          setValue={setvTTD}
+        /> */}
+        {Swap ? (
+          <>
+            <InputComponent
+              type="pay"
+              label="vRT"
+              value={vRT}
+              setValue={setvRT}
+            />
+            <div className="flex justify-center mb-2">
+              <button onClick={handleSwap} className="btn btn-accent hover:bg-secondary p-2 rounded-xl">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+                  />
+                </svg>
+              </button>
+            </div>
+            <InputComponent
+              type="receive"
+              label="vTTD"
+              value={vTTD}
+              setValue={setvTTD}
+            />
+          </>
+        ) : (
+          <>
+            <InputComponent
+              type="pay"
+              label="vTTD"
+              value={vTTD}
+              setValue={setvTTD}
+            />
+            <div className="flex justify-center mb-2">
+              <button onClick={handleSwap} className="btn btn-accent hover:bg-secondary p-2 rounded-xl">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+                  />
+                </svg>
+              </button>
+            </div>
+            <DisabledInputComponent type="receive" label="vRT" initialValue={vTTD*0.67} currency="vRT" />
+          </>
+        )}
         <div className="flex justify-center">
           {!isConnected ? (
             <Button onClick={handleConnect}>Connect Wallet</Button>
           ) : (
-            <>
-              {/* <Button
-                onClick={() =>
-                  sendTransaction({
-                    to: "0x1a343eFB966E63bfA25A2b368455448f02466Ffc",
-                    value: parseEther("0.1"),
-                  })
-                }
-                disabled={isConfirming}
-                variant={"secondary"}
-              >
-                Swap
-              </Button> */}
-              <Button className="rounded-2xl px-6">Swap</Button>
-            </>
+            <Button className="rounded-2xl px-6">Swap</Button>
           )}
         </div>
       </Card>
