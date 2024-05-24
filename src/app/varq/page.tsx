@@ -67,7 +67,7 @@ export default function Varq() {
           <div className="flex flex-row justify-between">
             <h1>vUSD: {(Number(vUSD_balance) / 10 ** 18).toFixed(2)}</h1>
             <h1>vTTD: {(Number(vTTD_balance) / 10 ** 18).toFixed(2)}</h1>
-            <h1>vRT: ({(Number(vRT_balance) / 10 ** 18).toFixed(2)}</h1>
+            <h1>vRT: {(Number(vRT_balance) / 10 ** 18).toFixed(2)}</h1>
           </div>
         </div>
       </Card>

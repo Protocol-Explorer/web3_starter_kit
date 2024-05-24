@@ -24,40 +24,40 @@ export default function Claim() {
   const {open}=useWeb3Modal();
   const [contractName,setcontractName]=useState<string>("");
   const [loading,setLoading]=useState(false);
-  const [error,setError]=useState<Error|null>(null);
   const handleConnect = () => {
     open();
   };
-  /*interface ReadContractCall{
-    data?:string;
-    error?:any;
-    isError?:boolean;
-    isLoading?:boolean;
-  }
-  const handleApproveCall = async ()=>{
-    console.log('handling happening');
-    try{
-      setLoading(true);
-      setError(null);
+  const {writeContract, data:hash}=useWriteContract();
+  const {
+    isLoading: isConfirming,
+    error,
+    isSuccess: isConfirmed,
+  } = useWaitForTransactionReceipt({
+    hash,
+  });
 
-      const result:ReadContractCall= await useWriteContract({
-        address:"0xbCCc252A134cEf81be20DF52F27D9029507F3605",
-        abi:MUSD_CONTRACT,
-        functionName:'approve',
-        args:[address,"10000000000000000000"]
-      })
-      if(result.isError){
-        throw new Error(result.error)
-      }
-      setcontractName(result.data || '')
-    }catch(error){
-      setError(error instanceof Error ? error : new Error(String(error)));
-      console.log(error)
-    }finally{
-      setLoading(false);
+  useEffect(() => {
+    if (isConfirming) {
+      toast.loading("Transaction Pending");
     }
-  };*/
-  const {writeContract}=useWriteContract();
+    toast.dismiss();
+
+    if (isConfirmed) {
+      toast.success("Transaction Successful", {
+        action: {
+          label: "View on Etherscan",
+          onClick: () => {
+            window.open(`https://sepolia.etherscan.io/tx/${hash}`);
+          },
+        },
+      });
+    }
+    if (error) {
+      toast.error("Transaction Failed");
+    }
+  }, [isConfirming, isConfirmed, error, hash]);
+
+
   return (
     <main className='flex flex-row justify-center align-center'>
         <Card className='max-w-md mx-auto rounded-3xl lg:mt-0 mt-14 bg-background'>
@@ -72,6 +72,7 @@ export default function Claim() {
                       address:"0x3A23b1EdD60851aB69ab941B54528c385b0C1dFC",
                       functionName:'claim',
                     })}
+                    disabled={isConfirming}
                     className="rounded-2xl px-6 mt-12">Claim
                   </Button>
                 </>
